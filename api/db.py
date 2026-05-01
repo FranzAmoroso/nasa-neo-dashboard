@@ -9,11 +9,11 @@ load_dotenv()
 
 API_URL = os.getenv("API_URL")
 API_KEY = os.getenv("API_KEY")
-REDIS_URL = os.getenv("UPSTASH_REDIS_REST_URL", "redis://localhost:6379")
+REDIS_URL = os.getenv("UPSTASH_REDIS_REST_URL")
 REDIS_TOKEN = os.getenv("UPSTASH_REDIS_REST_TOKEN")
 
 
-r = redis_async.Redis(REDIS_URL, token= REDIS_TOKEN)
+r = redis_async.Redis(url=REDIS_URL, token= REDIS_TOKEN)
 async def get_cache(start_date: str, end_date: str):
     cache_key = f"nasa:{start_date}:{end_date}"
 
