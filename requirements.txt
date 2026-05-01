@@ -3,7 +3,3 @@ uvicorn
 upstash-redis
 httpx
 python-dotenv
-datetime
-dotenv
-os
-json

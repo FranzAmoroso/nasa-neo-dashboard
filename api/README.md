@@ -17,11 +17,6 @@ Dopo aver attivato l'ambiente, installa le dipendenze:
 pip install -r requirements.txt
 ```
 
-### 4. Attivare l'ambiente
-~~~bash
-source neo-nasa/bin/activate
-~~~
-
 ### 5. Avviare il server con
     
 1.  uvicorn
@@ -37,8 +32,4 @@ source neo-nasa/bin/activate
 senza Redis il backend darà un errore 500.
 ~~~bash
 sudo service redis-server stop
-~~~
-### 6. disattivare l'ambiente
-~~~bash
-deactivate
 ~~~
