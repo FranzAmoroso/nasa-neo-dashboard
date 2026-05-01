@@ -1,9 +1,9 @@
 api/.env
 api/__pycache__/
 api/*.pyc
-api/neo-nasa/*
+api/neo-nasa/
 api/.neo-nasa
-frontend/node_modules/
-frontend/.next/
+frontend/node_modules/*
+frontend/.next/*
 frontend/npm-debug.log
 .vercel
