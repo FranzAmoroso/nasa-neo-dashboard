@@ -1,6 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
+  rewrites: async () => {
+    return [
+      {
+        source: '/api/:path*',
+        destination: '/api/index.py',
+      },
+    ];
+  },
 };
 
-export default nextConfig;
+module.exports = nextConfig;
