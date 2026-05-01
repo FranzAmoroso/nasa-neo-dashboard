@@ -1,11 +1,13 @@
 from fastapi import FastAPI, Query, HTTPException
 from db import get_cache
 from control import convert_date
+from fastapi.middleware.cors import CORSMiddleware
 
 
 app = FastAPI()
 
-@app.get("/asteroids/feed")
+
+@app.get("/asteroids/feed/")
 
 async def get_asteroids(
     start_date: str = Query(..., pattern=r"^\d{2}-\d{2}-\d{4}$"),

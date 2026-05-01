@@ -20,7 +20,7 @@ async def get_cache(start_date: str, end_date: str):
     try:
         json_data = await r.get(cache_key)
         if json_data:
-            return json.loads(json_data)
+            return json_data
         #print(f"DEBUG: Chiamo NASA con URL: {API_URL}")
         async with httpx.AsyncClient() as client:
             params = {
@@ -38,7 +38,7 @@ async def get_cache(start_date: str, end_date: str):
         
             data = response.json()
         
-        await r.set(cache_key, json.dumps(data), ex=604800)
+        await r.set(cache_key, data, ex=604800)
         return data
     except Exception as e:
         #print(f"ERRORE SERVER: {type(e).__name__} - {e}")
