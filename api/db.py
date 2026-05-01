@@ -1,4 +1,4 @@
-import redis.asyncio as redis_async
+from upstash_redis.asyncio import Redis
 import json
 import httpx
 import os
@@ -13,7 +13,7 @@ REDIS_URL = os.getenv("UPSTASH_REDIS_REST_URL")
 REDIS_TOKEN = os.getenv("UPSTASH_REDIS_REST_TOKEN")
 
 
-r = redis_async.Redis(url=REDIS_URL, token= REDIS_TOKEN)
+r = Redis(url=REDIS_URL, token= REDIS_TOKEN)
 async def get_cache(start_date: str, end_date: str):
     cache_key = f"nasa:{start_date}:{end_date}"
 
