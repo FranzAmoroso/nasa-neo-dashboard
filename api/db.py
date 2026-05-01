@@ -1,4 +1,4 @@
-from upstash_redis.asyncio import Redis
+from upstash_redis import Redis
 import json
 import httpx
 import os
