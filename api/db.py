@@ -41,5 +41,5 @@ async def get_cache(start_date: str, end_date: str):
         await r.set(cache_key, data, ex=604800)
         return data
     except Exception as e:
-        #print(f"ERRORE SERVER: {type(e).__name__} - {e}")
-        return None
+        print(f"ERRORE SERVER: {type(e).__name__} - {e}")
+        raise HTTPException(status_code=500, detail=str(e))
