@@ -6,7 +6,7 @@ from control import convert_date
 app = FastAPI()
 
 
-@app.get("/asteroids/feed")
+@app.get("/api/asteroids/feed")
 
 async def get_asteroids(
     start_date: str = Query(..., pattern=r"^\d{2}-\d{2}-\d{4}$"),
