@@ -10,7 +10,8 @@ export default function Home() {
       try {
         const start = "10-04-2026";
         const end = "11-04-2026";
-        const url = `/api/asteroids/feed?start_date=${start}&end_date=${end}`;
+        const baseUrl = "nasa-neo-dashboard-production.up.railway.app"
+        const url = `${baseUrl}/asteroids/feed?start_date=${start}&end_date=${end}`;
         const response = await fetch(url);
         const result = await response.json();
         setData(result);
