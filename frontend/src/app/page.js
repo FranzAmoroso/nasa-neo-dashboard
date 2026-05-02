@@ -11,7 +11,7 @@ export default function Home() {
     setLoading(true);
     setError(null);
     try {
-      const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+      const baseUrl = "redis://nasa-neo-dashboard-production.up.railway.app/asteroids/feed";
       const url = `${baseUrl}?start_date=${startDate}&end_date=${endDate}`;
       
       const response = await fetch(url);
