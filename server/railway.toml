@@ -1,0 +1,10 @@
+[build]
+builder = "railpack"
+buildCommand = "echo building!"
+
+[deploy]
+preDeployCommand = ["uvicorn main:app --reload"]
+startCommand = "echo starting!"
+healthcheckPath = "/"
+healthcheckTimeout = 100
+restartPolicyType = "never"
