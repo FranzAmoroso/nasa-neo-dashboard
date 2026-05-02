@@ -9,7 +9,6 @@ load_dotenv()
 
 API_URL = os.getenv("API_URL")
 API_KEY = os.getenv("API_KEY")
-REDIS_URL = os.getenv("REDIS_URL")
 
 
 r = redis.Redis.from_url(REDIS_URL)
