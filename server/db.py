@@ -11,7 +11,7 @@ API_URL = os.getenv("API_URL")
 API_KEY = os.getenv("API_KEY")
 
 
-r = redis.Redis.from_url(REDIS_URL)
+r = redis.Redis.from_url(os.getenv("REDIS_URL"))
 async def get_cache(start_date: str, end_date: str):
     cache_key = f"nasa:{start_date}:{end_date}"
 
