@@ -2,13 +2,13 @@
   "$schema": "https://railway.com/railway.schema.json",
   "build": {
     "builder": "RAILPACK",
-    "buildCommand": "echo building!"
+    "buildCommand": "pip install -r requirements.txt"
   },
   "deploy": {
-    "preDeployCommand": ["npm run db:migrate"],
-    "startCommand": "echo starting!",
+    "preDeployCommand": [""],
+    "startCommand": "uvicorn main:app --host 0.0.0.0 --port ${PORT:-6567}",
     "healthcheckPath": "/",
     "healthcheckTimeout": 100,
-    "restartPolicyType": "never"
+    "restartPolicyType": "on_failure"
   }
 }
