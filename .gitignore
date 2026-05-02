@@ -1,9 +1,9 @@
-api/.env
-api/__pycache__/
-api/*.pyc
+backend/.env
+backend/__pycache__/
+backend/*.pyc
 .venv/
 .venv
-frontend/node_modules/*
-frontend/.next/*
+frontend/node_modules/
+frontend/.next/
 frontend/npm-debug.log
 .vercel
