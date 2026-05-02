@@ -7,7 +7,7 @@
   "deploy": {
     "preDeployCommand": [""],
     "startCommand": "uvicorn main:app --host 0.0.0.0 --port ${PORT:-6567}",
-    "healthcheckPath": "/asteroids/feed",
+    "healthcheckPath": "/",
     "healthcheckTimeout": 100,
     "restartPolicyType": "on_failure"
   }
