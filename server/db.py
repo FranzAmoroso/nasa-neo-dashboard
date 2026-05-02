@@ -3,15 +3,13 @@ import json
 import httpx
 import os
 from fastapi import HTTPException
-from dotenv import load_dotenv
-
-load_dotenv()
 
 API_URL = os.getenv("API_URL")
 API_KEY = os.getenv("API_KEY")
+REDIS_URL = os.getenv("REDIS_URL")
 
 
-r = redis.Redis.from_url(os.getenv("REDIS_URL"))
+r = redis.Redis.from_url(REDIS_URL)
 async def get_cache(start_date: str, end_date: str):
     cache_key = f"nasa:{start_date}:{end_date}"
 
