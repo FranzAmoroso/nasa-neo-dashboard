@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 
 export default function Home() {
-  // Stati per i dati e il caricamento
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -12,7 +11,7 @@ export default function Home() {
     setLoading(true);
     setError(null);
     try {
-      const baseUrl = process.env.NEXT_PUBLIC_API_URL || "https://railway.app";
+      const baseUrl = process.env.NEXT_PUBLIC_API_URL;
       const url = `${baseUrl}/asteroids/feed?start_date=${startDate}&end_date=${endDate}`;
       
       const response = await fetch(url);

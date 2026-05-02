@@ -35,7 +35,7 @@ async def get_cache(start_date: str, end_date: str):
         
             data = response.json()
         
-        await r.set(cache_key, json.dump(data), ex=604800)
+        await r.set(cache_key, json.dumps(data), ex=604800)
         return data
     except Exception as e:
         print(f"ERRORE SERVER: {type(e).__name__} - {e}")
