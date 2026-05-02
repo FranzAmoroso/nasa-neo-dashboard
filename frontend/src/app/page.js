@@ -12,7 +12,7 @@ export default function Home() {
     setError(null);
     try {
       const baseUrl = process.env.NEXT_PUBLIC_API_URL;
-      const url = `${baseUrl}/asteroids/feed?start_date=${startDate}&end_date=${endDate}`;
+      const url = `${baseUrl}?start_date=${startDate}&end_date=${endDate}`;
       
       const response = await fetch(url);
       
