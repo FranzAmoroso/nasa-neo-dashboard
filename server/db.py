@@ -1,16 +1,18 @@
-from redis.asyncio import Redis
+from redis.asyncio import redis_asyncio
 import json
 import httpx
 import os
 from fastapi import HTTPException
 from dotenv import load_dotenv
 
+load_dotenv()
+
 API_URL = os.getenv("API_URL")
 API_KEY = os.getenv("API_KEY")
 REDIS_URL = os.getenv("REDIS_URL")
 
 
-r = Redis.from_url(REDIS_URL, decode_response=True)
+r = redis_asyncio.from_url(REDIS_URL, decode_response=True)
 async def get_cache(start_date: str, end_date: str):
     cache_key = f"nasa:{start_date}:{end_date}"
 
