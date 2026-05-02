@@ -1,18 +1,15 @@
-"use client";
-import { useEffect, useState } from "react";
-
-export default function Home() { 
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     async function fetchData() {
       try {
         const start = "10-04-2026";
         const end = "11-04-2026";
-        const baseUrl = "nasa-neo-dashboard-production.up.railway.app"
+        const baseUrl = process.env.NEXT_PUBLIC_API_URL || "https://nasa-neo-dashboard-production.up.railway.app";
+        
         const url = `${baseUrl}/asteroids/feed?start_date=${start}&end_date=${end}`;
+        
         const response = await fetch(url);
+        if (!response.ok) throw new Error("Errore nella risposta del server");
+        
         const result = await response.json();
         setData(result);
       } catch (error) {
@@ -23,13 +20,3 @@ export default function Home() {
     }
     fetchData();
   }, []);
-
-  if (loading) return <p>Caricamento...</p>;
-
-  return (
-    <main>
-      <h1>Dati NASA</h1>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
-    </main>
-  );
-}

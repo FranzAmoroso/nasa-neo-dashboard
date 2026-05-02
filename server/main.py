@@ -1,9 +1,16 @@
 from fastapi import FastAPI, Query, HTTPException
 from db import get_cache
 from control import convert_date
-
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], 
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 
