@@ -5,6 +5,10 @@ from control import convert_date
 
 app = FastAPI()
 
+@app.get("/")
+
+async def healt_check_path():
+    return {'server':'online'}
 
 @app.get("/asteroids/feed")
 
