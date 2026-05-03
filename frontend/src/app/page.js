@@ -14,7 +14,7 @@ export default function Home() {
       const baseUrl = "https://nasa-neo-dashboard-production.up.railway.app/asteroids/feed";
       const url = `${baseUrl}?start_date=${startDate}&end_date=${endDate}`;
       
-      const response = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+      const response = await fetch(baseUrl);
       
       if (!response.ok) {
         throw new Error(`Errore server: ${response.status}`);
@@ -31,7 +31,7 @@ export default function Home() {
   }
   useEffect(() => {
     fetchData();
-  }, [startDate]);
+  }, []);
 
   return (
     <main style={{ padding: "20px", fontFamily: "sans-serif" }}>

@@ -7,6 +7,7 @@ from fastapi import HTTPException
 API_URL = os.getenv("API_URL")
 API_KEY = os.getenv("API_KEY")
 REDIS_URL = os.getenv("REDIS_URL")
+API_TEST = "https://jsonplaceholder.typicode.com/todos/1"
 
 print("DEBUG REDIS URL:", REDIS_URL)
 
@@ -27,7 +28,7 @@ async def get_cache(start_date: str, end_date: str):
             "api_key":API_KEY
             }  
         
-            response = await client.get(API_URL, params= params, timeout = 50.0)
+            response = await client.get(API_TEST, params= params, timeout = 50.0)
 
             if response.status_code != 200:
                 print(f"NASA REJECTED: {response.status_code} - {response.text}")
