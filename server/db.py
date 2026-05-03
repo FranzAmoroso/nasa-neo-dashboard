@@ -7,11 +7,13 @@ from fastapi import HTTPException
 API_URL = os.getenv("API_URL")
 API_KEY = os.getenv("API_KEY")
 REDIS_URL = os.getenv("REDIS_URL")
+REDIS_PUBLIC_URL = os.getev("REDIS_PUBLIC_URL")
 API_TEST = "https://jsonplaceholder.typicode.com/todos/1"
 
 print("DEBUG REDIS URL:", REDIS_URL)
 
-r = redis.Redis.from_url(REDIS_URL)
+r = redis.Redis.from_url(REDIS_PUBLIC_URL)
+
 async def get_cache(start_date: str, end_date: str):
     cache_key = f"nasa:{start_date}:{end_date}"
 
