@@ -15,14 +15,14 @@ export default function Home() {
 
     try {
       const baseUrl =
-        "https://nasa-neo-dashboard-production.up.railway.app/asteroids/feed/";
+        "https://nasa-neo-dashboard-production.up.railway.app/asteroids/feed";
 
       const url =
         `${baseUrl}?start_date=${startDate}&end_date=${endDate}`;
 
       console.log("URL:", url);
 
-      const response = await fetch(url);
+      const response = await fetch(url.toString());
 
       if (!response.ok) {
         throw new Error(`Errore server: ${response.status}`);
