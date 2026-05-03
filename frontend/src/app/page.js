@@ -14,7 +14,7 @@ export default function Home() {
       const baseUrl = "https://nasa-neo-dashboard-production.up.railway.app/asteroids/feed";
       const url = `${baseUrl}?start_date=${startDate}&end_date=${endDate}`;
       
-      const response = await fetch(url);
+      const response = await fetch("https://jsonplaceholder.typicode.com/todos/1");
       
       if (!response.ok) {
         throw new Error(`Errore server: ${response.status}`);
