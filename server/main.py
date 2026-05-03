@@ -18,7 +18,7 @@ app.add_middleware(
 async def healt_check_path():
     return {'server':'online'}
 
-@app.get("/asteroids/feed")
+@app.get("/asteroids/feed/todo")
 
 
 async def get_asteroids(
