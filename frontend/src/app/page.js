@@ -22,7 +22,7 @@ export default function Home() {
 
       console.log("URL:", url);
 
-      const response = await fetch("/home");
+      const response = await fetch(url);
 
       if (!response.ok) {
         throw new Error(`Errore server: ${response.status}`);
