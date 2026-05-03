@@ -10,7 +10,7 @@ REDIS_URL = os.getenv("REDIS_URL")
 
 print("DEBUG REDIS URL:", REDIS_URL)
 
-r = redis.Redis.from_url(REDIS_URL, decode_responses=True)
+r = redis.Redis.from_url(REDIS_URL)
 async def get_cache(start_date: str, end_date: str):
     cache_key = f"nasa:{start_date}:{end_date}"
 

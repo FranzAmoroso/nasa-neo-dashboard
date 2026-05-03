@@ -13,7 +13,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/")
+@app.get("/home")
 
 async def healt_check_path():
     return {'server':'online'}

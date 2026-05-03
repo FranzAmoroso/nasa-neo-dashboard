@@ -31,7 +31,7 @@ export default function Home() {
   }
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [startDate]);
 
   return (
     <main style={{ padding: "20px", fontFamily: "sans-serif" }}>
