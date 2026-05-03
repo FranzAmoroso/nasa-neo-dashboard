@@ -199,7 +199,7 @@ export default function Home() {
       }}
     >
       <Avatar
-        src="/meteorite.png"
+        src="/meteorite_01.png"
         alt="meteorite"
         sx={{
           width: 90,
