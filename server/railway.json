@@ -6,7 +6,7 @@
   },
   "deploy": {
     "preDeployCommand": [""],
-    "startCommand": "uvicorn main:app --host 0.0.0.0 --port $PORT",
+    "startCommand": "uvicorn main:app --host 0.0.0.0 --port 6895",
     "healthcheckPath": "/home",
     "healthcheckTimeout": 100,
     "restartPolicyType": "on_failure"
