@@ -10,21 +10,9 @@ REDIS_URL = os.getenv("REDIS_URL")
 REDIS_PUBLIC_URL = os.getenv("REDIS_PUBLIC_URL")
 API_TEST = "https://jsonplaceholder.typicode.com/todos/1"
 
-print("DEBUG REDIS URL:", REDIS_URL)
+print("DEBUG", API_URL)
 
 r = redis.Redis.from_url(REDIS_PUBLIC_URL)
-
-@app.get("/asteroids/feed/")
-
-
-async def get_asteroids(
-    start_date: str = Query(..., pattern=r"^\d{2}-\d{2}-\d{4}$"),
-    end_date: str = Query(None, pattern=r"^\d{2}-\d{2}-\d{4}$")
-):
-    if end_date is None:
-        end_date = start_date
-    s_date, e_date = convert_date(start_date, end_date)
-    data = await get_cache(s_date, e_date)
 
 async def get_cache(start_date: str, end_date: str):
     cache_key = f"nasa:{start_date}:{end_date}"
@@ -42,7 +30,7 @@ async def get_cache(start_date: str, end_date: str):
             "api_key":API_KEY
             }  
         
-            response = await client.get(API_TEST, params= params, timeout = 50.0)
+            response = await client.get(API_URL, params= params, timeout = 50.0)
 
             if response.status_code != 200:
                 print(f"NASA REJECTED: {response.status_code} - {response.text}")
