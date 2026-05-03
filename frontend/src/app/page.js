@@ -54,9 +54,6 @@ export default function Home() {
     fetchData();
   }, []);
 
-  export function Item() {
-    <div className="flex w-full max-w-lg flex-col gap-6"></div>;
-  }
 
   return (
     <main style={{ padding: "20px" }}>
