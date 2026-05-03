@@ -20,6 +20,7 @@ async def healt_check_path():
 
 @app.get("/asteroids/feed")
 
+
 async def get_asteroids(
     start_date: str = Query(..., pattern=r"^\d{2}-\d{2}-\d{4}$"),
     end_date: str = Query(None, pattern=r"^\d{2}-\d{2}-\d{4}$")
@@ -27,8 +28,8 @@ async def get_asteroids(
     if end_date is None:
         end_date = start_date
     s_date, e_date = convert_date(start_date, end_date)
-
     data = await get_cache(s_date, e_date)
+    
 
     if not data:
         raise HTTPException(status_code=500, detail= "Errore recupero cache")

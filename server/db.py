@@ -14,7 +14,10 @@ print("DEBUG REDIS URL:", REDIS_URL)
 
 r = redis.Redis.from_url(REDIS_PUBLIC_URL)
 
+
+
 async def get_cache(start_date: str, end_date: str):
+    print("DEBUG: start_date= ", start_date, " end_date= ", end_date)
     cache_key = f"nasa:{start_date}:{end_date}"
 
     try:
