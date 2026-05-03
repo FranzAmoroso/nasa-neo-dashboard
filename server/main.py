@@ -18,7 +18,7 @@ app.add_middleware(
 async def healt_check_path():
     return {'server':'online'}
 
-@app.get("/asteroids/feed")
+@app.post("/asteroids/feed")
 
 async def get_asteroids(
     start_date: str = Query(..., pattern=r"^\d{2}-\d{2}-\d{4}$"),
