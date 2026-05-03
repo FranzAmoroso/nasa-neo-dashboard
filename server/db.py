@@ -16,7 +16,9 @@ r = redis.Redis.from_url(REDIS_PUBLIC_URL)
 
 
 
-async def get_cache(start_date: str, end_date: str):
+async def get_cache():
+    start_date = "10-10-1999"
+    end_date = "10-10-1990"
     print("DEBUG: start_date= ", start_date, " end_date= ", end_date)
     cache_key = f"nasa:{start_date}:{end_date}"
 
@@ -33,7 +35,7 @@ async def get_cache(start_date: str, end_date: str):
             "api_key":API_KEY
             }  
         
-            response = await client.get(API_TEST, params= params, timeout = 50.0)
+            response = await client.get(API_TEST, timeout = 50.0)
 
             if response.status_code != 200:
                 print(f"NASA REJECTED: {response.status_code} - {response.text}")
