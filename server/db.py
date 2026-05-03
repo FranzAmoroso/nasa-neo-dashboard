@@ -7,7 +7,7 @@ from fastapi import HTTPException
 API_URL = os.getenv("API_URL")
 API_KEY = os.getenv("API_KEY")
 REDIS_URL = os.getenv("REDIS_URL")
-REDIS_PUBLIC_URL = os.getev("REDIS_PUBLIC_URL")
+REDIS_PUBLIC_URL = os.getenv("REDIS_PUBLIC_URL")
 API_TEST = "https://jsonplaceholder.typicode.com/todos/1"
 
 print("DEBUG REDIS URL:", REDIS_URL)
