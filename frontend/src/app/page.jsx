@@ -177,7 +177,7 @@ export default function Home() {
         </Stack>
       )}
 
-      {error && (
+      {!error && (
         <Alert
           severity="error"
           sx={{
