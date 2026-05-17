@@ -34,7 +34,7 @@ async def get_asteroids(
     if end_date is None:
         end_date = start_date
     s_date, e_date = convert_date(start_date, end_date) #se dal front passo data italiana
-    data = await get_cache(s_date, s_date)
+    data = await get_cache(s_date, e_date)
     
 
     if not data:
