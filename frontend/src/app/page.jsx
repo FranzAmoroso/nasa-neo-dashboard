@@ -1,18 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
-import {
-  Container,
-  Typography,
-  CircularProgress,
-  Stack,
-  Alert,
-  Box,
-  Button,
-  Card,
-  CardContent,
-} from "@mui/material";
+import { Container, Typography, CircularProgress, Stack, Box, Card, CardContent } from "@mui/material";
 import { nasaTheme } from "./theme";
 
 export default function Home() {
@@ -22,28 +11,30 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  // Inizializziamo gli stati vuoti per evitare differenze tra Server e Client (Errore 418)
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+
   const getDynamicDate = (daysToAdd) => {
     const date = new Date();
     date.setDate(date.getDate() + daysToAdd);
     
-    const day = String(date.getDate()).padStart(2, "0");
-    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); 
     const year = date.getFullYear();
-    
     return `${day}-${month}-${year}`; 
   };
 
-
-  const [startDate] = useState(() => getDynamicDate(1));
-  const [endDate] = useState(() => getDynamicDate(5));
-
-  async function fetchData() {
+  // Funzione di fetch isolata che accetta le date come parametri diretti
+  async function fetchData(start, end) {
+    if (!start || !end) return;
     setLoading(true);
     setError(null);
     try {
-      const baseUrl =
-        "https://nasa-neo-dashboard-production.up.railway.app/asteroids/feed";
-      const url = `${baseUrl}?start_date=${startDate}&end_date=${endDate}`;
+      const baseUrl = "https://nasa-neo-dashboard-production.up.railway.app/asteroids/feed";
+      const url = `${baseUrl}?start_date=${start}&end_date=${end}`;
+
+      console.log("Chiamata API inviata a:", url);
 
       const response = await fetch(url);
       if (!response.ok) throw new Error(`Errore server: ${response.status}`);
@@ -51,22 +42,15 @@ export default function Home() {
       const result = await response.json();
 
       if (result.near_earth_objects) {
-        const fetchedAsteroids = Object.values(
-          result.near_earth_objects,
-        ).flat(); // tiene solo i value scartando le key
+        const fetchedAsteroids = Object.values(result.near_earth_objects).flat(); 
 
-        // elimina i duplicati e unisce nuovi con vecchi asteroidi
         setAsteroidsCache((prevCache) => {
           const combined = [...prevCache, ...fetchedAsteroids];
           const uniqueAsteroids = Array.from(
-            new Map(combined.map((item) => [item.id, item])).values(),
+            new Map(combined.map((item) => [item.id, item])).values()
           );
 
-          // setta in locale i dati in json
-          localStorage.setItem(
-            "nasa_asteroids_cache",
-            JSON.stringify(uniqueAsteroids),
-          );
+          localStorage.setItem("nasa_asteroids_cache", JSON.stringify(uniqueAsteroids));
           return uniqueAsteroids;
         });
       }
@@ -77,28 +61,32 @@ export default function Home() {
     }
   }
 
-  // Caricamento iniziale
+  // Caricamento iniziale centralizzato lato client
   useEffect(() => {
+    // 1. Leggi la cache locale
     const saved = localStorage.getItem("nasa_asteroids_cache");
     if (saved) {
       setAsteroidsCache(JSON.parse(saved));
     }
-    fetchData();
+
+    # 2. Calcola le date sul client ed aggiorna gli stati
+    const start = getDynamicDate(1);
+    const end = getDynamicDate(5);
+    setStartDate(start);
+    setEndDate(end);
+
+    # 3. Esegui la chiamata API con le date calcolate al momento
+    fetchData(start, end);
   }, []);
 
-  //  normalizzazione data (sistemare)
-  const formatDisplayDate = (dateString) => {
-    if (!dateString) return "";
-    if (dateString.includes("-") && dateString.indexOf("-") === 2) {
-      return dateString.replace(/-/g, "/");
-    }
-    // Sicurezza temporanea (AAAA-MM-GG)
-    if (dateString.includes("-") && dateString.indexOf("-") === 4) {
-      const [year, month, day] = dateString.split("-");
-      return `${day}/${month}/${year}`;
-    }
-    return dateString;
-  };
+  // Controllo di sicurezza per evitare flash grafici spiacevoli prima che le date siano pronte
+  if (!startDate || !endDate) {
+    return (
+      <Container maxWidth="lg" sx={{ py: 6, textAlign: "center", color: nasaTheme.text.primary }}>
+        <CircularProgress color="info" />
+      </Container>
+    );
+  }
 
   const getAsteroidMetrics = (asteroid) => {
     const maxDiameter =
