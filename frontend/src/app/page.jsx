@@ -25,8 +25,11 @@ export default function Home() {
   const getDynamicDate = (daysToAdd) => {
     const date = new Date();
     date.setDate(date.getDate() + daysToAdd);
-    // taglia in due la stringa data e prende solo la prima parte
-    return date.toISOString().split("T")[0];
+    
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Mese base zero
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`; // Formato GG-MM-AAAA accettato dal backend
   };
 
   const [startDate] = useState(() => getDynamicDate(1));
@@ -157,7 +160,7 @@ export default function Home() {
         Scansione automatica attiva dal{" "}
         <strong style={{ color: nasaTheme.text.accent }}>
           {formatDisplayDate(startDate)}
-        </strong>{" "}
+        </strong>{" "}Visualizzazione offline della cache locale attiva.
         al{" "}
         <strong style={{ color: nasaTheme.text.accent }}>
           {formatDisplayDate(endDate)}
