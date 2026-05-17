@@ -26,11 +26,13 @@ export default function Home() {
     const date = new Date();
     date.setDate(date.getDate() + daysToAdd);
     
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Mese base zero
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
     const year = date.getFullYear();
-    return `${day}-${month}-${year}`; // Formato GG-MM-AAAA accettato dal backend
+    
+    return `${day}-${month}-${year}`; 
   };
+
 
   const [startDate] = useState(() => getDynamicDate(1));
   const [endDate] = useState(() => getDynamicDate(5));
@@ -85,10 +87,17 @@ export default function Home() {
   }, []);
 
   //  normalizzazione data (sistemare)
-  const formatDisplayDate = (isoDate) => {
-    if (!isoDate) return "";
-    const [year, month, day] = isoDate.split("-");
-    return `${day}/${month}/${year}`;
+  const formatDisplayDate = (dateString) => {
+    if (!dateString) return "";
+    if (dateString.includes("-") && dateString.indexOf("-") === 2) {
+      return dateString.replace(/-/g, "/");
+    }
+    // Sicurezza temporanea (AAAA-MM-GG)
+    if (dateString.includes("-") && dateString.indexOf("-") === 4) {
+      const [year, month, day] = dateString.split("-");
+      return `${day}/${month}/${year}`;
+    }
+    return dateString;
   };
 
   const getAsteroidMetrics = (asteroid) => {
@@ -160,7 +169,7 @@ export default function Home() {
         Scansione automatica attiva dal{" "}
         <strong style={{ color: nasaTheme.text.accent }}>
           {formatDisplayDate(startDate)}
-        </strong>{" "}Visualizzazione offline della cache locale attiva.
+        </strong>{" "}
         al{" "}
         <strong style={{ color: nasaTheme.text.accent }}>
           {formatDisplayDate(endDate)}
@@ -180,19 +189,6 @@ export default function Home() {
         </Stack>
       )}
 
-      {!error && (
-        <Alert
-          severity="error"
-          sx={{
-            mb: 4,
-            background: "rgba(255,0,0,0.1)",
-            color: nasaTheme.text.primary,
-            border: "1px solid rgba(255,0,0,0.3)",
-          }}
-        >
-          Visualizzazione offline della cache locale attiva.
-        </Alert>
-      )}
 
       <Stack spacing={3} mt={0}>
         {asteroidsCache.map((asteroid) => {
