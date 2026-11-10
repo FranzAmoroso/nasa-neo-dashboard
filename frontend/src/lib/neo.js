@@ -1,7 +1,7 @@
 // Dati degli asteroidi: chiamata al backend, normalizzazione, classificazione.
 import { PLANET_BY_ID } from "./planets";
 
-export const API_BASE = process.env.NEXT_PUBLIC_API_URL || "https://nasa-neo-dashboard-production.up.railway.app";
+export const API_BASE = process.env.NEXT_PUBLIC_API_URL || "https://nasa-neo-dashboard-6vc4.vercel.app/";
 
 export const DAY = 86400000;
 export const LD_KM = 384400;
