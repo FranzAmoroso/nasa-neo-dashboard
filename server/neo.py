@@ -1,10 +1,3 @@
-"""Trasforma la risposta NeoWs in una lista pronta per il frontend.
-
-Ogni asteroide diventa un dizionario piatto con i campi che la dashboard usa:
-data e ora del passaggio (ISO, UTC), distanza in km e in distanze lunari,
-diametro stimato, velocità, flag di pericolosità e link JPL.
-"""
-
 from datetime import datetime, timezone
 
 
