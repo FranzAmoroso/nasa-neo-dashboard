@@ -43,6 +43,8 @@ export default function Dashboard() {
   const [chartsOpen, setChartsOpen] = useState(false);
   const [card, setCard] = useState(null);
   const [pdfOpen, setPdfOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
 
   // ---------- dati ----------
   const load = useCallback(async (signal) => {
@@ -68,7 +70,10 @@ export default function Dashboard() {
       clearInterval(id);
     };
   }, [load]);
+    // sostituisci il blocco useEffect dell'orologio con questo
   useEffect(() => {
+    setMounted(true);
+    setNow(Date.now());
     const id = setInterval(() => setNow(Date.now()), 15000);
     return () => clearInterval(id);
   }, []);
@@ -225,7 +230,7 @@ export default function Dashboard() {
 
         <p className="clock">
           <span className="sr">Current date and time: </span>
-          {dClock.format(now)}
+           {mounted ? dClock.format(now) : "\u00a0"}
         </p>
 
         {showCharts && status === "ready" && (
